@@ -1,0 +1,39 @@
+﻿@model IEnumerable<RollerShop.Models.AllObjects>
+<div>
+    </br>
+    <table class="table table-striped">
+        <thead class="btn-primary">
+            <tr>
+                <th>Nazwa</th>
+                <th>Kategoria</th>
+                <th>Producent</th>
+                <th>Cena</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Product.Name</td>
+                        <td>@item.Category.Name</td>
+                        <td>@item.Maker.Name</td>
+                        <td>@item.Product.Price zł</td>
+                        <td>@Html.ActionLink("Szczegóły", "DetailProduct", new { id = item.Product.IdProduct })</td>
+                        <td>
+                            @using (Html.BeginForm("AddToCart", "Cart"))
+                        {
+                                @Html.HiddenFor(model => item.Product.IdProduct)
+                                @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                                <input type="submit" value="Dodaj do koszyka"/>
+                        }
+                    </td>
+                        <!-- <td>Html.ActionLink("Dodaj do koszyka", "AddToCart", new { id = item.Product.IdProduct })</td> -->
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

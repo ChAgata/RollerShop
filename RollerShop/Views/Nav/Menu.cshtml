@@ -1,0 +1,8 @@
+﻿@model IEnumerable<RollerShop.Models.Category>
+<div><h3><b>
+    Kategorie</b></h3>
+</div>
+@foreach (var link in Model)
+{
+    <div class="nav nav-tabs"><h4><b>@Html.RouteLink(link.Name, new { controller = "ProductList", action = "List", category = link.Name })</b></h4></div>
+}
